@@ -6,4 +6,6 @@ import com.revature.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	public User findByEmailAndPassword(String email, String password);
+
 }
