@@ -26,8 +26,17 @@ public class UserController {
 
 	@CrossOrigin
 	@PostMapping("/register")
-	public User register(@RequestBody User user) {
-		return userService.createUser(user);
+	public User register(@RequestBody User user) throws Exception {
+		String tempEmail = user.getEmail();
+		if(tempEmail != null && !"".equals(tempEmail)) {
+			User userObject = userService.getUserByEmail(tempEmail);
+			if(userObject != null) {
+				throw new Exception("User with email " + tempEmail + " is already exist!");
+			}
+		}
+		User userObject = null;
+		userObject = userService.createUser(user);
+		return userObject;
 	}
 	
 	@CrossOrigin
