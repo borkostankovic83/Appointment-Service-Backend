@@ -1,6 +1,5 @@
 package com.revature.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -21,11 +20,6 @@ public class User {
 	private String lastName;
 	private String email;
 	private String password;
-	private String address;
-	private String city;
-	private String state;
-	private String zip;
-	private String gender;
 	
 	@CreatedDate
 	private Date registrationDate;
@@ -34,18 +28,12 @@ public class User {
 
 	}
 	
-	public User(Long id, String firstName, String lastName, String email, String password, String address, String city,
-			String state, String zip, String gender, Date registrationDate) {
+	public User(Long id, String firstName, String lastName, String email, String password, Date registrationDate) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-		this.gender = gender;
 		this.registrationDate = registrationDate;
 	}
 
@@ -89,45 +77,7 @@ public class User {
 		this.password = password;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getZip() {
-		return zip;
-	}
-
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+	
 
 	public Date getRegistrationDate() {
 		return registrationDate;
@@ -140,9 +90,9 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", address=" + address + ", city=" + city + ", state=" + state + ", zip="
-				+ zip + ", gender=" + gender + "]";
+				+ ", password=" + password + ", registrationDate=" + registrationDate + "]";
 	}
+
 	
 
 }
