@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	//Register user save user to database
 	@CrossOrigin
 	@PostMapping("/register")
 	public User register(@RequestBody User user) throws Exception {
@@ -39,12 +41,22 @@ public class UserController {
 		return userObject;
 	}
 	
+	//Get back all users from db
 	@CrossOrigin
 	@GetMapping
 	public List<User> users(){
 		return userService.getUsers();
 		
 	}
+	
+	//Get user by email address, so send email receive user object
+	@CrossOrigin
+	@GetMapping("/{email}")
+	public User getUserByEmail(@PathVariable(value = "email") String email) {
+		User user = userService.getUserByEmail(email);	
+		return user;
+	}
+	
 	
 	
 }
