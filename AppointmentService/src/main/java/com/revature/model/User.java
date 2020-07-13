@@ -39,7 +39,7 @@ public class User {
 	}
 		
 	public User(Long id, String firstName, String lastName, String email, String password, String role,
-			Date registrationDate, Set<Pet> pets) {
+			Date registrationDate, Set<Pet> pet) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -47,10 +47,9 @@ public class User {
 		this.password = password;
 		this.role = role;
 		this.registrationDate = registrationDate;
-		this.pets = pets;
+		this.pet = pet;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -107,19 +106,19 @@ public class User {
 		this.registrationDate = registrationDate;
 	}
 
-	public Set<Pet> getPets() {
-		return pets;
+	public Set<Pet> getPet() {
+		return pet;
 	}
 
-	public void setPets(Set<Pet> pets) {
-		this.pets = pets;
+	public void setPet(Set<Pet> pet) {
+		this.pet = pet;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", role=" + role + ", registrationDate=" + registrationDate + ", pets="
-				+ pets + "]";
+				+ ", password=" + password + ", role=" + role + ", registrationDate=" + registrationDate + ", pet="
+				+ pet + "]";
 	}
 
 	

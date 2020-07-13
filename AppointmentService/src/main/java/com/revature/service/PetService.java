@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class PetService {
 
 	public Pet createPet(Pet pet) {
 		return petRepository.save(pet);
+	}
+
+	public List<Pet> getAllPets() {
+		return petRepository.findAll();
 	}
 	
 	

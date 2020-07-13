@@ -22,7 +22,8 @@ public class Pet {
     private Long userId;
 	
 	private String petName;
-	private String type;
+	private String petType;
+	private String breed;
 	private String gender;
 	private String age;
 	
@@ -32,13 +33,15 @@ public class Pet {
     private User user;
 	
 	public Pet() {
-	}
-	
-	public Pet(Long id, Long userId, String petName, String type, String gender, String age, User user) {
+	}	
+
+	public Pet(Long id, Long userId, String petName, String petType, String breed, String gender, String age,
+			User user) {
 		this.id = id;
 		this.userId = userId;
 		this.petName = petName;
-		this.type = type;
+		this.petType = petType;
+		this.breed = breed;
 		this.gender = gender;
 		this.age = age;
 		this.user = user;
@@ -68,12 +71,20 @@ public class Pet {
 		this.petName = petName;
 	}
 
-	public String getType() {
-		return type;
+	public String getPetType() {
+		return petType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setPetType(String petType) {
+		this.petType = petType;
+	}
+
+	public String getBreed() {
+		return breed;
+	}
+
+	public void setBreed(String breed) {
+		this.breed = breed;
 	}
 
 	public String getGender() {
@@ -101,8 +112,8 @@ public class Pet {
 	
 	@Override
 	public String toString() {
-		return "Pet [id=" + id + ", userId=" + userId + ", petName=" + petName + ", type=" + type + ", gender=" + gender
-				+ ", age=" + age + ", user=" + user + "]";
+		return "Pet [id=" + id + ", userId=" + userId + ", petName=" + petName + ", petType=" + petType + ", breed="
+				+ breed + ", gender=" + gender + ", age=" + age + ", user=" + user + "]";
 	}
 	
 	
