@@ -1,13 +1,18 @@
 package com.revature.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.CreatedDate;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -25,12 +30,16 @@ public class User {
 	@CreatedDate
 	private Date registrationDate;
 	
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnoreProperties({"user", "image"})
+	private Set<Pet> pet;
+	
 	public User() {
 
 	}
 		
 	public User(Long id, String firstName, String lastName, String email, String password, String role,
-			Date registrationDate) {
+			Date registrationDate, Set<Pet> pets) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -38,17 +47,10 @@ public class User {
 		this.password = password;
 		this.role = role;
 		this.registrationDate = registrationDate;
+		this.pets = pets;
 	}
-
-	public User(Long id, String firstName, String lastName, String email, String password, Date registrationDate) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.registrationDate = registrationDate;
-	}
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -105,10 +107,19 @@ public class User {
 		this.registrationDate = registrationDate;
 	}
 
+	public Set<Pet> getPets() {
+		return pets;
+	}
+
+	public void setPets(Set<Pet> pets) {
+		this.pets = pets;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", role=" + role + ", registrationDate=" + registrationDate + "]";
+				+ ", password=" + password + ", role=" + role + ", registrationDate=" + registrationDate + ", pets="
+				+ pets + "]";
 	}
 
 	
