@@ -37,11 +37,12 @@ public class UserController {
 			}
 		}
 		User userObject = null;
+		user.setRole("User");
 		userObject = userService.createUser(user);
 		return userObject;
 	}
 	
-	//Get back all users from db
+	//Get back all users from y
 	@CrossOrigin
 	@GetMapping
 	public List<User> users(){
