@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.model.User;
-import com.revature.repositiry.UserRepository;
+import com.revature.repository.UserRepository;
 
 @Service
 public class UserService {
