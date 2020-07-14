@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,11 +45,35 @@ public class UserController {
 		return userObject;
 	}
 	
-	//Get back all users from y
+	//Get back all users from database
 	@CrossOrigin
 	@GetMapping
 	public List<User> users(){
 		return userService.getUsers();
+		
+	}
+	
+	//Get back all with role 'Vet' users from database
+	@CrossOrigin
+	@GetMapping("/vets")
+	public List<User> vets(){
+		return userService.getVetsUsers();
+		
+	}	
+	
+	//Get back all with role 'User' users from database
+	@CrossOrigin
+	@GetMapping("/customers")
+	public List<User> customers(){
+		return userService.getCustomersUsers();
+		
+	}	
+	
+	//Get back all with role 'User' users from database
+	@CrossOrigin
+	@GetMapping("/admins")
+	public List<User> admins(){
+		return userService.getAdminsUsers();
 		
 	}
 	
@@ -71,6 +96,13 @@ public class UserController {
 		user.setPassword(userDetails.getPassword());
 		final User updatedUser = userService.updateUser(user);
 		return ResponseEntity.ok(updatedUser);
+	}
+	
+	//delete user
+	@CrossOrigin
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		userService.deleteUser(id);
 	}
 	
 }

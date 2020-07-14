@@ -42,4 +42,20 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
+	public List<User> getVetsUsers() {
+		return userRepository.getAllVets();
+	}
+
+	public List<User> getCustomersUsers() {
+		return userRepository.getCustomers();
+	}
+
+	public List<User> getAdminsUsers() {
+		return userRepository.getAdmins();
+	}
+
+	public void deleteUser(Long id) {
+		userRepository.deleteById(id);
+	}
+
 }
