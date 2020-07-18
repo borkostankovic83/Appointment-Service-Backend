@@ -28,22 +28,19 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	//Register user save user to database
+	//Register user save user to database with roll User
 	@CrossOrigin
 	@PostMapping("/register")
-	public User register(@RequestBody User user) throws Exception {
-		String tempEmail = user.getEmail();
-		if(tempEmail != null && !"".equals(tempEmail)) {
-			User userObject = userService.getUserByEmail(tempEmail);
-			if(userObject != null) {
-				throw new Exception("User with email " + tempEmail + " is already exist!");
-			}
-		}
-		User userObject = null;
-		user.setRole("User");
-		userObject = userService.createUser(user);
-		return userObject;
+	public User registerUser(@RequestBody User user) throws Exception {
+		return userService.createUser(user);
 	}
+	
+	//Register user save user to database with roll Vet
+		@CrossOrigin
+		@PostMapping("/vet")
+		public User registerVet(@RequestBody User user) throws Exception  {		
+			return userService.createVet(user);
+		}
 	
 	//Get back all users from database
 	@CrossOrigin

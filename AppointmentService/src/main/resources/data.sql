@@ -15,3 +15,10 @@ insert into pet(id, user_id, pet_name, pet_type, breed, gender, age) values (1, 
 insert into pet(id, user_id, pet_name, pet_type, breed, gender, age) values (2, 1, 'Abby', 'Husky', 'Dog', 'Female', '6');
 insert into pet(id, user_id, pet_name, pet_type, breed, gender, age) values (3, 2, 'Leo', 'Borzoi', 'Dog', 'Male', '3');
 
+
+
+
+insert into appointment(id, appointment_date, appointment_start_time, appointment_end_time, user_id, pet_id, status) values (1, '2020-07-17', '11:00:00', '12:00:00', 2, 3, 1);
+insert into appointment(id, appointment_date, appointment_start_time, appointment_end_time, user_id, pet_id, status) values (2, '2020-07-16', '12:00:00', '13:00:00', 1, 1, 0);
+insert into appointment(id, appointment_date, appointment_start_time, appointment_end_time, user_id, pet_id, status) values (3, '2020-07-14', '11:00:00', '12:00:00', 2, 3, 1);
+insert into appointment(id, appointment_date, appointment_start_time, appointment_end_time, user_id, pet_id, status) values (4, '2020-07-15', '12:00:00', '13:00:00', 1, 1, 0);

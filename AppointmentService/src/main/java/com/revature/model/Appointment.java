@@ -1,6 +1,7 @@
 package com.revature.model;
 
 import java.sql.Time;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,33 +21,63 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
 	
-//	private Time startTime;
-//	private Time endTime;
+    private LocalDate appointmentDate;
+    private Time appointmentStartTime;
+    private Time appointmentEndTime;
 	
 	@Column(name = "user_id")
 	private String userId;
 	
-//	@Column(name = "pet_id")
-//	private String petId;
+	@Column(name = "pet_id")
+	private String petId;
 	
-//	@Column(name = "vet_id")
-//	private String vetId;
-	
-	private Time appointmentDate;
-	
+	private AppointmentStatus status = AppointmentStatus.Booked;
+		
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name="user_id", insertable = false, updatable = false)
-	@JsonIgnoreProperties({"pet", "appointment", "vet"})
+	@JsonIgnoreProperties({"pet", "appointment", "user"})
     private User user;
 
+	
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name="pet_id", insertable = false, updatable = false)
+	@JsonIgnoreProperties({"user", "appointment", "pet"})
+    private Pet pet;
+	
 	public Appointment() {
 	}
 
-	public Appointment(Long id, String userId, Time appointmentDate, User user) {
+	public Appointment(Long id, LocalDate appointmentDate, Time appointmentStartTime, Time appointmentEndTime,
+			String userId, String petId, AppointmentStatus status, User user, Pet pet) {
 		this.id = id;
-		this.userId = userId;
 		this.appointmentDate = appointmentDate;
+		this.appointmentStartTime = appointmentStartTime;
+		this.appointmentEndTime = appointmentEndTime;
+		this.userId = userId;
+		this.petId = petId;
+		this.status = status;
 		this.user = user;
+		this.pet = pet;
+	}
+
+	public Appointment(Long id, LocalDate appointmentDate, Time appointmentStartTime, Time appointmentEndTime,
+			String userId, String petId, User user, Pet pet) {
+		this.id = id;
+		this.appointmentDate = appointmentDate;
+		this.appointmentStartTime = appointmentStartTime;
+		this.appointmentEndTime = appointmentEndTime;
+		this.userId = userId;
+		this.petId = petId;
+		this.user = user;
+		this.pet = pet;
+	}
+
+	public Appointment(LocalDate appointmentDate, String userId, String petId, User user, Pet pet) {
+		this.appointmentDate = appointmentDate;
+		this.userId = userId;
+		this.petId = petId;
+		this.user = user;
+		this.pet = pet;
 	}
 
 	public Long getId() {
@@ -57,6 +88,30 @@ public class Appointment {
 		this.id = id;
 	}
 
+	public LocalDate getAppointmentDate() {
+		return appointmentDate;
+	}
+
+	public void setAppointmentDate(LocalDate appointmentDate) {
+		this.appointmentDate = appointmentDate;
+	}
+
+	public Time getAppointmentStartTime() {
+		return appointmentStartTime;
+	}
+
+	public void setAppointmentStartTime(Time appointmentStartTime) {
+		this.appointmentStartTime = appointmentStartTime;
+	}
+
+	public Time getAppointmentEndTime() {
+		return appointmentEndTime;
+	}
+
+	public void setAppointmentEndTime(Time appointmentEndTime) {
+		this.appointmentEndTime = appointmentEndTime;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -65,12 +120,20 @@ public class Appointment {
 		this.userId = userId;
 	}
 
-	public Time getAppointmentDate() {
-		return appointmentDate;
+	public String getPetId() {
+		return petId;
 	}
 
-	public void setAppointmentDate(Time appointmentDate) {
-		this.appointmentDate = appointmentDate;
+	public void setPetId(String petId) {
+		this.petId = petId;
+	}
+
+	public AppointmentStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AppointmentStatus status) {
+		this.status = status;
 	}
 
 	public User getUser() {
@@ -81,17 +144,20 @@ public class Appointment {
 		this.user = user;
 	}
 
+	public Pet getPet() {
+		return pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+
 	@Override
 	public String toString() {
-		return "Appointment [id=" + id + ", userId=" + userId + ", appointmentDate=" + appointmentDate + ", user="
-				+ user + "]";
+		return "Appointment [id=" + id + ", appointmentDate=" + appointmentDate + ", appointmentStartTime="
+				+ appointmentStartTime + ", appointmentEndTime=" + appointmentEndTime + ", userId=" + userId
+				+ ", petId=" + petId + ", status=" + status + ", user=" + user + ", pet=" + pet + "]";
 	}
-	
-//	@ManyToOne(cascade = CascadeType.REFRESH)
-//	@JoinColumn(name="user_id", insertable = false, updatable = false)
-//	@JsonIgnoreProperties({"user", "appointment", "vet"})
-//    private Pet pet;
-	
-	
 
+	
 }

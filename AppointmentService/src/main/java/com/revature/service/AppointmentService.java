@@ -1,6 +1,8 @@
 package com.revature.service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,29 @@ public class AppointmentService {
 	public void deleteAppointment(Long id) {
 		appointmentRepository.deleteById(id);
 	}
+
+	public Optional<Appointment> findById(Long id) {
+		return appointmentRepository.findById(id);
+	}
+
+//	public List<Appointment> findByDateRange(LocalDate startDate, LocalDate endDate) {
+//		return appointmentRepository.findByDateRange(startDate, endDate);
+//	}
+
+	public Appointment update(Long id, Appointment appointment) {
+		return appointmentRepository.save(appointment);
+	}
+
+	public Appointment updateStatus(Long id, Appointment appointment) {
+		Optional<Appointment> appointmentList = appointmentRepository.findById(id);
+
+        if(appointmentList.isPresent()){
+            if(appointment.getStatus() != null){
+                appointmentList.get().setStatus(appointment.getStatus());
+            }
+            return appointmentRepository.save(appointmentList.get());
+        }
+        return null;	}
 	
 	
 }

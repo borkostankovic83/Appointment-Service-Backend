@@ -18,8 +18,18 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	public User createUser(User user) {
-		return userRepository.save(user);
+	public User createUser(User user) throws Exception {
+		String tempEmail = user.getEmail();
+		if(tempEmail != null && !"".equals(tempEmail)) {
+			User userObject = userRepository.findByEmail(tempEmail);
+			if(userObject != null) {
+				throw new Exception("User with email " + tempEmail + " is already exist!");
+			}
+		}
+		User userObject = null;
+		user.setRole("User");
+		userObject = userRepository.save(user);
+		return userObject;
 	}
 
 	public List<User> getUsers() {
@@ -56,6 +66,20 @@ public class UserService {
 
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
+	}
+
+	public User createVet(User user) throws Exception {
+		String tempEmail = user.getEmail();
+		if(tempEmail != null && !"".equals(tempEmail)) {
+			User userObject = userRepository.findByEmail(tempEmail);
+			if(userObject != null) {
+				throw new Exception("User with email " + tempEmail + " is already exist!");
+			}
+		}
+		User userObject = null;
+		user.setRole("Vet");
+		userObject = userRepository.save(user);
+		return userObject;
 	}
 
 }

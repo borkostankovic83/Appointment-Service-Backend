@@ -34,12 +34,16 @@ public class User {
 	@JsonIgnoreProperties({"user", "image"})
 	private Set<Pet> pet;
 	
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnoreProperties({"user", "image"})
+	private Set<Appointment> appointment;
+	
 	public User() {
 
 	}
 		
 	public User(Long id, String firstName, String lastName, String email, String password, String role,
-			Date registrationDate, Set<Pet> pet) {
+			Date registrationDate, Set<Pet> pet, Set<Appointment> appointment) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -48,6 +52,7 @@ public class User {
 		this.role = role;
 		this.registrationDate = registrationDate;
 		this.pet = pet;
+		this.appointment = appointment;
 	}
 
 	public Long getId() {
@@ -114,11 +119,19 @@ public class User {
 		this.pet = pet;
 	}
 
+	public Set<Appointment> getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Set<Appointment> appointment) {
+		this.appointment = appointment;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", role=" + role + ", registrationDate=" + registrationDate + ", pet="
-				+ pet + "]";
+				+ pet + ", appointment=" + appointment + "]";
 	}
 
 	
