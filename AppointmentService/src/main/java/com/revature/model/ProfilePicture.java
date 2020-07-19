@@ -28,10 +28,10 @@ public class ProfilePicture {
 	@Lob
 	private byte[] image;
 
-//	@OneToOne(cascade = CascadeType.REFRESH)
-//	@JoinColumn(name = "user_id")
-//	@JsonIgnoreProperties({"images", "pets"})
-	@OneToOne(mappedBy = "images")
+	@OneToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "user_id")
+	@JsonIgnoreProperties({"images", "pets"})
+//	@OneToOne(mappedBy = "images")
 	private User user;
 
 	public ProfilePicture() {

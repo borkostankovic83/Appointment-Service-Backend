@@ -41,10 +41,9 @@ public class User {
 	@JsonIgnoreProperties({"user", "image"})
 	private Set<Appointment> appointment;
 	
-//	@OneToOne(mappedBy = "user")
-//	@JsonIgnoreProperties({"user", "image"})
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+	@OneToOne(mappedBy = "user")
+	@JsonIgnoreProperties({"user", "image"})
+//	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private ProfilePicture image;
 	
 	public User() {
