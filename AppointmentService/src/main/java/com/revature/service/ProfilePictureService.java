@@ -39,7 +39,7 @@ public class ProfilePictureService {
 	
 	public ProfilePicture getImage(Long id) {
 		try {
-			ProfilePicture profilePicture = userRepository.getOne(id).getImages();
+			ProfilePicture profilePicture = userRepository.findById(id).get().getImage();
 			if(((MultipartFile) profilePicture).isEmpty() || profilePicture == null) {
 				throw new ImageNotFoundException("Image not found");
 			}
@@ -48,5 +48,4 @@ public class ProfilePictureService {
   			throw new ImageNotFoundException("Image not found");
 		}
 	}
-	
 }

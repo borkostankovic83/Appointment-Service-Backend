@@ -5,9 +5,11 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -39,16 +41,18 @@ public class User {
 	@JsonIgnoreProperties({"user", "image"})
 	private Set<Appointment> appointment;
 	
-	@OneToOne(mappedBy = "user")
-	@JsonIgnoreProperties({"user", "image"})
-	private ProfilePicture images;
+//	@OneToOne(mappedBy = "user")
+//	@JsonIgnoreProperties({"user", "image"})
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+	private ProfilePicture image;
 	
 	public User() {
 
 	}
 		
 	public User(Long id, String firstName, String lastName, String email, String password, String role,
-			Date registrationDate, Set<Pet> pet, Set<Appointment> appointment, ProfilePicture images) {
+			Date registrationDate, Set<Pet> pet, Set<Appointment> appointment, ProfilePicture image) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -58,7 +62,7 @@ public class User {
 		this.registrationDate = registrationDate;
 		this.pet = pet;
 		this.appointment = appointment;
-		this.images = images;
+		this.image = image;
 	}
 
 	public Long getId() {
@@ -133,19 +137,19 @@ public class User {
 		this.appointment = appointment;
 	}
 
-	public ProfilePicture getImages() {
-		return images;
+	public ProfilePicture getImage() {
+		return image;
 	}
 
-	public void setImages(ProfilePicture images) {
-		this.images = images;
+	public void setImage(ProfilePicture image) {
+		this.image = image;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", role=" + role + ", registrationDate=" + registrationDate + ", pet="
-				+ pet + ", appointment=" + appointment + ", images=" + images + "]";
+				+ pet + ", appointment=" + appointment + ", image=" + image + "]";
 	}
 
 }

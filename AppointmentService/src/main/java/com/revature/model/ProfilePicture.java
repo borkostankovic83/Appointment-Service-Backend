@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,11 +25,13 @@ public class ProfilePicture {
 	private Long id;
 
 	@Column(name = "image")
+	@Lob
 	private byte[] image;
 
-	@OneToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties({"images", "pets"})
+//	@OneToOne(cascade = CascadeType.REFRESH)
+//	@JoinColumn(name = "user_id")
+//	@JsonIgnoreProperties({"images", "pets"})
+	@OneToOne(mappedBy = "images")
 	private User user;
 
 	public ProfilePicture() {

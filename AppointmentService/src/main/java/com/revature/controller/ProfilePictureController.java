@@ -32,9 +32,9 @@ public class ProfilePictureController {
 	}
 
 	@GetMapping("image/{userId}")
-	public ResponseEntity<ProfilePicture> getImage(@PathVariable Long userId) throws ImageNotFoundException {
+	public ResponseEntity<ProfilePicture> getImage(@PathVariable int userId) throws ImageNotFoundException {
 		try {
-	      return ResponseEntity.ok(profilePictureService.getImage(userId));
+	      return ResponseEntity.ok(profilePictureService.getImage((long) userId));
 	    } catch (ImageNotFoundException e) {
 	      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found!", e);
 	    }
@@ -42,13 +42,13 @@ public class ProfilePictureController {
 
 	
 	@PutMapping("/image/{id}")
-	public ResponseEntity<ProfilePicture> addImage(@PathVariable Long id, MultipartHttpServletRequest request){
-		User user = userService.findById(id);
+	public ResponseEntity<ProfilePicture> addImage(@PathVariable int id, MultipartHttpServletRequest request){
+		User user = userService.findById((long) id);
 	    try {
 	      return ResponseEntity.ok(profilePictureService.addImage(user, request));
 	    }
 	    catch (UserNotFoundException e) {
-	      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found!", e);
+	      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!", e);
 	    }
 	    catch( ImageConflictException e) {
 	      throw new ResponseStatusException(HttpStatus.CONFLICT, "There was an issue uploading the image!", e);
