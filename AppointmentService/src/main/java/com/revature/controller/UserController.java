@@ -2,7 +2,6 @@ package com.revature.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,7 +22,7 @@ public class UserController {
 
 	private UserService userService;
 
-	@Autowired
+	// Don't need @Autowired anymore
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
@@ -36,11 +35,11 @@ public class UserController {
 	}
 	
 	//Register user save user to database with roll Vet
-		@CrossOrigin
-		@PostMapping("/vet")
-		public User registerVet(@RequestBody User user) throws Exception  {		
-			return userService.createVet(user);
-		}
+	@CrossOrigin
+	@PostMapping("/vet")
+	public User registerVet(@RequestBody User user) throws Exception  {		
+		return userService.createVet(user);
+	}
 	
 	//Get back all users from database
 	@CrossOrigin

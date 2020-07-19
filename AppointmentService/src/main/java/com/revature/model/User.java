@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.CreatedDate;
 
@@ -38,12 +39,16 @@ public class User {
 	@JsonIgnoreProperties({"user", "image"})
 	private Set<Appointment> appointment;
 	
+	@OneToOne(mappedBy = "user")
+	@JsonIgnoreProperties({"user", "image"})
+	private ProfilePicture images;
+	
 	public User() {
 
 	}
 		
 	public User(Long id, String firstName, String lastName, String email, String password, String role,
-			Date registrationDate, Set<Pet> pet, Set<Appointment> appointment) {
+			Date registrationDate, Set<Pet> pet, Set<Appointment> appointment, ProfilePicture images) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -53,6 +58,7 @@ public class User {
 		this.registrationDate = registrationDate;
 		this.pet = pet;
 		this.appointment = appointment;
+		this.images = images;
 	}
 
 	public Long getId() {
@@ -127,13 +133,19 @@ public class User {
 		this.appointment = appointment;
 	}
 
+	public ProfilePicture getImages() {
+		return images;
+	}
+
+	public void setImages(ProfilePicture images) {
+		this.images = images;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", role=" + role + ", registrationDate=" + registrationDate + ", pet="
-				+ pet + ", appointment=" + appointment + "]";
+				+ pet + ", appointment=" + appointment + ", images=" + images + "]";
 	}
-
-	
 
 }
