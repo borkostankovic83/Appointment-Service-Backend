@@ -1,5 +1,6 @@
 package com.revature.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.persistence.CascadeType;
@@ -17,9 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "images")
-public class ProfilePicture {
+public class ProfilePicture implements  Serializable {
 	
-    @Id
+	private static final long serialVersionUID = 1L;
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
@@ -30,7 +33,7 @@ public class ProfilePicture {
 
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties({"images", "pets"})
+	@JsonIgnoreProperties({"images", "hibernateLazyInitializer"})
 //	@OneToOne(mappedBy = "images")
 	private User user;
 

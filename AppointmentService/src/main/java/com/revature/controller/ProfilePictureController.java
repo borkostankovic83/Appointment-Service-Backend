@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,21 +32,22 @@ public class ProfilePictureController {
 		this.userService = userService;
 	}
 
+	@CrossOrigin
 	@GetMapping("image/{userId}")
 	public ResponseEntity<ProfilePicture> getImage(@PathVariable int userId) throws ImageNotFoundException {
 		try {
-	      return ResponseEntity.ok(profilePictureService.getImage((long) userId));
+	      return ResponseEntity.ok(userService.findById((long) userId).getImage());
 	    } catch (ImageNotFoundException e) {
 	      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found!", e);
 	    }
 	  }
 
-	
+	@CrossOrigin
 	@PutMapping("/image/{id}")
-	public ResponseEntity<ProfilePicture> addImage(@PathVariable int id, MultipartHttpServletRequest request){
+	public ResponseEntity<ProfilePicture> addImage(@PathVariable int id, MultipartHttpServletRequest file){
 		User user = userService.findById((long) id);
 	    try {
-	      return ResponseEntity.ok(profilePictureService.addImage(user, request));
+	      return ResponseEntity.ok(profilePictureService.addImage(user, file));
 	    }
 	    catch (UserNotFoundException e) {
 	      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!", e);

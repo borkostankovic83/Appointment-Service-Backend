@@ -25,9 +25,8 @@ public class ProfilePictureService {
 		this.profilePictureRepository = profilePictureRepository;
 	}
 
-	public ProfilePicture addImage(User user, MultipartHttpServletRequest request) throws IOException, ImageConflictException {
-		
-		MultipartFile mPF = request.getFile("image");
+	public ProfilePicture addImage(User user, MultipartHttpServletRequest file) throws IOException, ImageConflictException {
+		MultipartFile mPF = file.getFile("image");
 		byte[] bytes = mPF.getBytes();
 		if (bytes == null) {
 			throw new ImageConflictException("Invalid image");

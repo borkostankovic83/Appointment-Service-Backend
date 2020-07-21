@@ -5,11 +5,9 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -42,8 +40,7 @@ public class User {
 	private Set<Appointment> appointment;
 	
 	@OneToOne(mappedBy = "user")
-	@JsonIgnoreProperties({"user", "image"})
-//	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@JsonIgnoreProperties({"user", "images", "hibernateLazyInitializer"})
 	private ProfilePicture image;
 	
 	public User() {
