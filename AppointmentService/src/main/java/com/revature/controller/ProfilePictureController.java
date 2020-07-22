@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -42,6 +44,20 @@ public class ProfilePictureController {
 	    }
 	  }
 
+	
+//	@PutMapping("/update/{user_id}")
+//	public void updateImage(@PathVariable int id, MultipartHttpServletRequest file) throws IOException, ResourceNotFoundException {
+//		ProfilePicture im = profilePictureService.findByUserId(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Image not found"));
+//		System.out.println("Original Image Byte Size - " + file.getBytes().length);
+//		im.setName(file.getOriginalFilename());
+//		im.setPicByte(compressBytes(file.getBytes()));
+//		im.setType(file.getContentType());
+//		final ProfilePicture updatedImageModel = profilePictureService.save(im);
+//	}
+//	
+	
+	
 	@CrossOrigin
 	@PutMapping("/image/{id}")
 	public ResponseEntity<ProfilePicture> addImage(@PathVariable int id, MultipartHttpServletRequest file){

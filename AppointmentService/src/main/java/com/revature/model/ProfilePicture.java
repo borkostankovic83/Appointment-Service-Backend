@@ -1,8 +1,6 @@
 package com.revature.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +14,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "images")
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode @ToString
 public class ProfilePicture implements  Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -34,46 +40,6 @@ public class ProfilePicture implements  Serializable {
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "user_id")
 	@JsonIgnoreProperties({"images", "hibernateLazyInitializer"})
-//	@OneToOne(mappedBy = "images")
 	private User user;
-
-	public ProfilePicture() {
-	}
-
-	public ProfilePicture(Long id, byte[] image, User user) {
-		this.id = id;
-		this.image = image;
-		this.user = user;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@Override
-	public String toString() {
-		return "ProfilePicture [id=" + id + ", image=" + Arrays.toString(image) + ", user=" + user + "]";
-	}
-	    
-
+ 
 }

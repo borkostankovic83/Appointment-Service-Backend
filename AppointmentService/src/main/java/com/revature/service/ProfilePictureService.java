@@ -47,4 +47,8 @@ public class ProfilePictureService {
   			throw new ImageNotFoundException("Image not found");
 		}
 	}
+
+//	public ProfilePicture findByUserId(int id) {
+//		return profilePictureRepository.findByUserId(id);
+//	}
 }

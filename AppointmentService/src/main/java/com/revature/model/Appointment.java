@@ -14,7 +14,15 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode @ToString
 public class Appointment {
 	
 	@Id
@@ -43,121 +51,5 @@ public class Appointment {
 	@JoinColumn(name="pet_id", insertable = false, updatable = false)
 	@JsonIgnoreProperties({"user", "appointment", "pet"})
     private Pet pet;
-	
-	public Appointment() {
-	}
-
-	public Appointment(Long id, LocalDate appointmentDate, Time appointmentStartTime, Time appointmentEndTime,
-			String userId, String petId, AppointmentStatus status, User user, Pet pet) {
-		this.id = id;
-		this.appointmentDate = appointmentDate;
-		this.appointmentStartTime = appointmentStartTime;
-		this.appointmentEndTime = appointmentEndTime;
-		this.userId = userId;
-		this.petId = petId;
-		this.status = status;
-		this.user = user;
-		this.pet = pet;
-	}
-
-	public Appointment(Long id, LocalDate appointmentDate, Time appointmentStartTime, Time appointmentEndTime,
-			String userId, String petId, User user, Pet pet) {
-		this.id = id;
-		this.appointmentDate = appointmentDate;
-		this.appointmentStartTime = appointmentStartTime;
-		this.appointmentEndTime = appointmentEndTime;
-		this.userId = userId;
-		this.petId = petId;
-		this.user = user;
-		this.pet = pet;
-	}
-
-	public Appointment(LocalDate appointmentDate, String userId, String petId, User user, Pet pet) {
-		this.appointmentDate = appointmentDate;
-		this.userId = userId;
-		this.petId = petId;
-		this.user = user;
-		this.pet = pet;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public LocalDate getAppointmentDate() {
-		return appointmentDate;
-	}
-
-	public void setAppointmentDate(LocalDate appointmentDate) {
-		this.appointmentDate = appointmentDate;
-	}
-
-	public Time getAppointmentStartTime() {
-		return appointmentStartTime;
-	}
-
-	public void setAppointmentStartTime(Time appointmentStartTime) {
-		this.appointmentStartTime = appointmentStartTime;
-	}
-
-	public Time getAppointmentEndTime() {
-		return appointmentEndTime;
-	}
-
-	public void setAppointmentEndTime(Time appointmentEndTime) {
-		this.appointmentEndTime = appointmentEndTime;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getPetId() {
-		return petId;
-	}
-
-	public void setPetId(String petId) {
-		this.petId = petId;
-	}
-
-	public AppointmentStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(AppointmentStatus status) {
-		this.status = status;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Pet getPet() {
-		return pet;
-	}
-
-	public void setPet(Pet pet) {
-		this.pet = pet;
-	}
-
-	@Override
-	public String toString() {
-		return "Appointment [id=" + id + ", appointmentDate=" + appointmentDate + ", appointmentStartTime="
-				+ appointmentStartTime + ", appointmentEndTime=" + appointmentEndTime + ", userId=" + userId
-				+ ", petId=" + petId + ", status=" + status + ", user=" + user + ", pet=" + pet + "]";
-	}
-
 	
 }
